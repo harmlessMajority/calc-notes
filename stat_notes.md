@@ -1,5 +1,10 @@
 
   
+
+## **Remember basic set theory**
+
+
+
 ## **Normal approximation for binomial distribution**
 
 For a given random variable $X \sim Bin(n, p)$ we know that:
@@ -39,18 +44,23 @@ $$P(A \cap B ) = P(A) \cdot P(B).$$
 ## **Hypotheses testing**
 >Remember: To find a suitable TS look in the same spots as for CI in the formula sheet.
 
-The ***p-value*** for a null hypothesis $H_0$ is defined as the probability of UL being equal to or more extreme than the TS. Where UL is the underlying random variable for $H_0$. Roughly speaking UL will share the same distribution as TS.
-
-Furthermore the ***p-value*** proves very useful because of the following property:
-
-$$H_0\text{ is rejected} \iff TS \in C \iff \text{p-value} < TS.$$
-
 ***Significance level***, (or sometimes just ***level***), denoted by $\alpha$, can be defined as: 
 
 $$\alpha = P(Z \geq z^*) \text{ for a one sided test } \land$$
 $$\alpha = P(Z \geq \frac{z^*}{2}) \text{ for a two sided test},\text{where $z^*$ is the critical value.}$$
 
 >When looking in the tables remember to look for $1-\alpha$ to get the correct answer since the tables refer to P(f(x) $\leq$ x).
+
+To find a confidence interval $C$ of a HT given it's critical value $z^*$ look at the hypothesis:
+$$C= (-\infin, -z^* ) \text{ when } H_a: \theta > x,$$
+$$C= (z^*, \inf) \text{ when } H_a: \theta < x,$$
+$$C= (-\infin, -z^*) \cup (z^*, \inf) \text{ when } H_a: \theta \neq x,$$
+
+The ***p-value*** for a null hypothesis $H_0$ is defined as the probability of UL being equal to or more extreme than the TS. Where UL is the underlying random variable for $H_0$. Roughly speaking UL will share the same distribution as TS.
+
+Furthermore the ***p-value*** proves very useful because of the following property:
+
+$$H_0\text{ is rejected} \iff TS \in C \iff \text{p-value} < TS.$$
 
 For any given hypotheses test there are 4 possible outcomes:
 
