@@ -93,7 +93,7 @@ $$\alpha = P(Z \geq \frac{z^*}{2}) \iff z^*  = Z_\frac{\alpha}{2} \text{ for a t
 >When looking in the tables remember to look for $1-\alpha$ to get the correct answer since the tables refer to P(f(x) $\leq$ x).
 
 ## **Critical region**
-To find the critical region $C$ of a HT given it's critical value $z^*$, simply look at the hypothesis:
+To find the critical region $C$ of a HT given it's critical value $z^{*}$, simply look at the hypothesis:
 $$C= (-\infty , -z^* ) \text{, when } H_a: \theta > x,$$
 $$C= (z^*, \infty) \text{, when } H_a: \theta < x,$$
 $$C= (-\infty , -z^*) \cup (z^*, \infty) \text{, when } H_a: \theta \neq x.$$
