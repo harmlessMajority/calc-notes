@@ -21,7 +21,7 @@ where x is the variable vector, A the coefficient matrix for the variables, and 
 
 
 ### 1.3 Active and inactive constraints
-Let $f(x) : \mathbb{R^n} \rightarrow \mathbb{R}$, for a given solution $x^*$, the constraints $f(x) \leq 0$ and $f(x) \geq 0$, are said to be active iff
+Let $f(x) : \mathbb{R^n} \rightarrow \mathbb{R}$, for a given solution $x^*$, the constraints $f(x) \leq 0 \text{ and } f(x) \geq 0$, are said to be active iff
 $$f(x^*) = 0.$$
 
 This definition is extended to equalities.
@@ -39,7 +39,7 @@ A set $C \subseteq R^n$ is said to be *convex* if the line segment between any t
 $$\forall x_1,x_2 \in C,\forall \lambda \in [0,1] : \lambda x_1 + (1-\lambda)x_2 \in C.$$
 
 The values satisfying a linear inequality constraint make up a halfspace
-$$\{x: a^Tx \leq b\}.$$
+$$\lbrace x: a^Tx \leq b\rbrace.$$
 
 We can prove that halfspaces are convex sets.
 $$\text{For some halfspace } C,$$
@@ -228,8 +228,8 @@ The variable coeficients will equal the right side of each constraint.
 ## 4. Graph theory
 
 ### 4.1 Notation 
-* Nodes: $N = \{i\}$.
-* Edges: $E = \{(i,j)\}, \text{ for } i,j \in N$.
+* Nodes: $N = \lbrace i\rbrace$.
+* Edges: $E = \lbrace (i,j)\rbrace, \text{ for } i,j \in N$.
 * Graph: $G = (N, E)$.
 * $\delta(i)$: The set of edges with node i as their start or endpoint.  
 * $\delta^+(i)$: The set of edges with i as their endpoint.
@@ -381,9 +381,9 @@ kruskal (nodes, edges, start_node):
 ## 5.3 Traveling salesman problem (TSP)
 The traveling salesman otherwise known as the minimum hamlitoncykle problem asks to find cheapest possible hamiltoncycle for a given graph.
 
-Generally this problem is fairly complicated. It can however be relaxed to finding the cheapest 1-tree. A one tree is a spanning tree for the nodes $N / \{1\}$ connected to node one by two edges.
+Generally this problem is fairly complicated. It can however be relaxed to finding the cheapest 1-tree. A one tree is a spanning tree for the nodes $N / \lbrace 1\rbrace $ connected to node one by two edges.
 
-As such, to find the cheapest 1-tree we begin by finding the minimum spanning tree for the nodes $N / \{1\}$, by using either prim or krusgals algorithm. We then add the two cheapest edges connecting to 1 to form a minimal 1-tree.
+As such, to find the cheapest 1-tree we begin by finding the minimum spanning tree for the nodes $N / \lbrace 1\rbrace$, by using either prim or krusgals algorithm. We then add the two cheapest edges connecting to 1 to form a minimal 1-tree.
 
 Every hamliton cycle is a 1-tree but not vice verca. Every 1-tree that is not a hamlitoncycle simply failes to meet its node requirement. Recall that a hamliton cycle by definition is a cycle that traverses each node only once. Therefore
 $$\forall i \in N : \delta(i) = 2$$
@@ -464,16 +464,16 @@ The chinese postman problem asks to find a minimum cost cycle which traverses ea
 Note that the lower bound to this problem is to traverse each edge exactly once. Thus if the graph contains a Euler cycle, it must be an optimal solution to the problem. 
 
 A graph G(N, E) contains one or more Euler cycles iff
-$$\forall i \in N, \; \exists k \in \Z : \delta(i) = 2k.$$
+$$\forall i \in N, \; \exists k \in \mathbb{Z} : \delta(i) = 2k.$$
 
 However if this condition is not met we need to select one or more edges to traverse multiple times in order to solve the problem.
 
 Since finding an Euler cycle is fairly trivial assuming that one does in fact exist. The problem then becomes which edges to chose to traverse multiple times. The general method consists of finding perfect matches for the nodes with an odd degree, adding those edges to the graph, and repeating untill we are left with a graph that contains an Euler cycle.
 
 ### Algorithm:
-1. Let $N_U = \{i \in N : \nexists k \in \Z : \delta(i) = 2k  \}$.
+1. Let $N_U = \lbrace i \in N : \nexists k \in \mathbb{Z} : \delta(i) = 2k  \rbrace$.
 2. If $N_U = \varnothing$, find an Euler cycle and break.
-3. Let $E_U = \{(i,j): i, j \in N_U, \; i \neq j\}$.
+3. Let $E_U = \lbrace (i,j): i, j \in N_U, \; i \neq j\rbrace$.
 4. $\forall (i,j) \in E_U : \text{cost}(i,j) = \text{cheapest path from i to j in }G(N,E)$.
 5. Let $M$ be the cheapest perfect matching for $G_U(N_U,E_U)$.
 6. $E \leftarrow E \cup M$.
@@ -501,7 +501,7 @@ The problem can be solved using Edmonds-Karps method.
 
 Edmonds-Karps method:
 1. Let $P$ be the cheapest path from source to sink.
-2. Let $f_{send} = \min \; \{\text{capacity}(i,j) - \text{flow}(i,j)  : (i,j) \in P\}$.
+2. Let $f_{send} = \min \; \lbrace \text{capacity}(i,j) - \text{flow}(i,j)  : (i,j) \in P\rbrace$.
 2. If $f_{send} = 0$, break.
 2. $\forall (i,j) \in P : \;\text{flow}(i,j) \leftarrow \text{flow}(i,j) + f_{max}$.
 3. Repeat.
@@ -545,7 +545,7 @@ By optimising this intervall, either by finding a better allowed solution, or by
 
 ### 7.2 Binary variables
 A binary variable is an integer variable that can only assume the values 1 or 0.
-$$x \in \{0,1\} $$
+$$x \in \lbrace 0,1\rbrace $$
 Binary variables can be used to reprecent choices between different constraints.
 Furthermore constraints on binary variables can be used to specify sets of possible choices that are possible to combine.
 
