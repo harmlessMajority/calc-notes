@@ -21,7 +21,8 @@ where x is the variable vector, A the coefficient matrix for the variables, and 
 
 
 ### 1.3 Active and inactive constraints
-Let $f(x) : \mathbb{R^n} \rightarrow \mathbb{R}$, for a given solution $x^*$, the constraints $f(x) \leq 0 \text{ and } f(x) \geq 0$, are said to be active iff
+Let $f(x) : \mathbb{R^n} \rightarrow \mathbb{R}$, for a given solution $x^{*}$, the constraints $f(x) \leq 0 \text{ and } f(x) \geq 0$, are said to be active iff
+
 $$f(x^*) = 0.$$
 
 This definition is extended to equalities.
@@ -65,11 +66,11 @@ Thus, to solve any linear optimization problem, all we have to do is traverse th
 
 ### 2.2 General algorithm
 Assume we wish to solve the following optimization problem using the simplex method:
-$$ max \; z = 4x_1 + 3x_2$$
-$$ when \; 2x_1 + 3x_2 \leq 30$$
-$$ \; x_1 \leq 6$$
-$$ \; 6x_1 + 4x_2 \leq 50$$
-$$ \; x_1, x_2 \geq 0$$
+$$max \; z = 4x_1 + 3x_2$$
+$$when \; 2x_1 + 3x_2 \leq 30$$
+$$\; x_1 \leq 6$$
+$$\; 6x_1 + 4x_2 \leq 50$$
+$$\; x_1, x_2 \geq 0$$
 
 Before the simplex algorithm can be applied, the problem must first be converted into standard form. This means that the number of constraints must be equal to the number of basic variables, which can be achieved by modifying our original constraints.
 
@@ -79,11 +80,11 @@ Before the simplex algorithm can be applied, the problem must first be converted
 
 If we convert our original problem to standard form we get
 
-$$ max \; z = 4x_1 + 3x_2$$
-$$ when \; 2x_1 + 3x_2 + x_3 = 30$$
-$$ \; x_1 + x_4 = 6$$
-$$ \; 6x_1 + 4x_2 + x_5 = 50$$
-$$ \; x_1, x_2, x_3, x_4, x_5 \geq 0$$
+$$max \; z = 4x_1 + 3x_2$$
+$$when \; 2x_1 + 3x_2 + x_3 = 30$$
+$$\; x_1 + x_4 = 6$$
+$$\; 6x_1 + 4x_2 + x_5 = 50$$
+$$\; x_1, x_2, x_3, x_4, x_5 \geq 0$$
 
 We now construct a tableau, with one column for each variable and one row for each equation in the standard form.
 
@@ -158,7 +159,7 @@ This fact can be used to reformulate an LP problem in order to view it through a
 
 Consider the following maximization problem:
 
-$$ \text{max } z = 3x_1 + 4x_2$$
+$$\text{max } z = 3x_1 + 4x_2$$
 $$\frac{1}{2}x_1 + 2x_2 \leq 30 \text{ (1) }$$
 $$3x_1 + x_2 \leq 25 \text{ (2)}$$
 $$x_1, x_2 \geq 0.$$
@@ -182,7 +183,7 @@ $$w = 3y_1 + 25y_2$$
 
 Additionally, based on (3) we get 2 linear constraints for w.
 
-$$ \text{(3)}\implies  3x_1 + 4x_2 \leq (\frac{1}{2}y_1 + 3y_2)x_1 + (2y_1 + y_2)x_2 \iff$$
+$$\text{(3)}\implies  3x_1 + 4x_2 \leq (\frac{1}{2}y_1 + 3y_2)x_1 + (2y_1 + y_2)x_2 \iff$$
 $$\iff \frac{1}{2}y_1 + 3y_2 \geq 3 \; \land \; 2y_1 + y_2\geq 4.$$
 
 It can now be deduced, that becuase
@@ -464,7 +465,7 @@ The chinese postman problem asks to find a minimum cost cycle which traverses ea
 Note that the lower bound to this problem is to traverse each edge exactly once. Thus if the graph contains a Euler cycle, it must be an optimal solution to the problem. 
 
 A graph G(N, E) contains one or more Euler cycles iff
-$$\forall i \in N, \; \exists k \in \mathbb{Z} : \delta(i) = 2k.$$
+$$\forall i \in N, \exists k \in \mathbb{Z} : \delta(i) = 2k.$$
 
 However if this condition is not met we need to select one or more edges to traverse multiple times in order to solve the problem.
 
