@@ -1,4 +1,4 @@
-# Viktor Bergström summary of TAOP33
+# Summary of TAOP33
 
 ## 1. Linear programming
 
@@ -11,8 +11,6 @@ $$z = 5x_1 + 13+x_2 - 2x_3.$$
 This can be written more generally as
 
 $$z = c^Tx,$$
-
-$$z = \sum_{i,j} x_{ij} c_{ij}$$
 
 where x is the variable vector, and c the coefficient vector for the variables.
 
@@ -135,16 +133,12 @@ The exiting variable should be the basic variable with the smallest resulting nu
 By use of row operations, make shure the collumn of the new entering variable is cleared except for a single 1 where it enters.
 
 The result tablou is 
-<center>
-
 |Base|z|$x_1$|$x_2$|$x_3$|$x_4$|$x_5$|$\hat{b}$|
 |--|--|--|--|--|--|--|--|
 |$z$|1|0|-3|0|4|0|24|
 |$x_3$|0|0|3|1|-2|0|18|
 |$x_1$|0|1|0|0|1|0|6|
 |$x_5$|0|0|4|0|-6|1|14|
-
-</center>
 
 repeating this process we get
 
@@ -233,13 +227,6 @@ This reformulated problem is known as the *dual*, while the original problem is 
 
 
 ### 3.2 Properties 
-Komplementaritet (i ord):
-Om primala bivillkor i inte är aktivt, måste yi = 0.
-Om duala bivillkor j inte är aktivt, måste xj = 0
-
-$$\forall i \in [1 \dots m]: y_i \sum_{j=1}^n(a_{ij}x_j - b_i) = 0$$
-
-$$\forall j \in [1 \dots n]: x_j \sum_{i=1}^m(a_{ij}y_i - c_j) = 0$$
 
 * Weak duality property:
   
@@ -247,22 +234,37 @@ $$\forall j \in [1 \dots n]: x_j \sum_{i=1}^m(a_{ij}y_i - c_j) = 0$$
     where Z and W are the sets of feasible solutions for the primal/dual.
     $$\text{max} \implies \bar{z} \leq \bar{w},$$
     $$\text{min} \implies \bar{z} \geq \bar{w}.$$
-* Unboundness property:
+* Unbounded property:
   
     If the either the primal or dual to a problem has an unbounded solution, then the remaining one will be infeasible.
+
 * Strong duality property:
   
     If the primal or dual problem has a finite optimal solution, then so does the remaining one. And the values of the primal and dual are equal at their optimal solutions.
 
 The optimal solution of the dual contains the so called *shadow prices* also known as *margins*.
 
+* Complementary constraints:
+$$\forall i \in [1 \dots m]: y_i \sum_{j=1}^n(a_{ij}x_j - b_i) = 0$$
+
+$$\forall j \in [1 \dots n]: x_j \sum_{i=1}^m(a_{ij}y_i - c_j) = 0$$
 
 ### 3.3 Formulating the dual
 
 1. For every constraint in the primal generate a variable in the dual.
 The variable coeficients will equal the right side of each constraint.
 2. For each variable in the primal generate a constraint in the dual. The type of constraint depends on the constraints put on the variable in the primal. The coefficients of each constraints in the dual will be the transpose of the primal constraint coeficients. Aka the constraints of each respective variable belonging to each generated constraint.
-3. Complementary constraints
+3. Formulate the complementary constraints.
+
+|Max||Min|
+|--|--|--|
+|$Ax \leq b$|$\iff$|$y \geq 0$|
+|$Ax \geq b$|$\iff$|$y \leq 0$|
+|$Ax = b$|$\iff$|$y$ is free|
+|$x \geq 0$|$\iff$|$A^Ty \geq c$|
+|$x \leq 0$|$\iff$|$A^Ty \leq c$|
+|$x$ is free|$\iff$|$A^Ty = c$|
+
 
 ## 4. Graph theory
 
@@ -318,7 +320,8 @@ For a graph with n nodes the following are equivalent
 ## 5 Common graph problems
 
 ### 5.1 Cheapest path problem 
-### 5.1 Dijkstra's algorithm  
+The cheapest path problem simply asks to find the cheapest way to traverse a weighted graph from a start node to an end node.
+### 5.1.1 Dijkstra's algorithm  
 Dijkastra's algorithm is a method for finding the shortest paths to all nodes in a graph from a given starting node. 
 
 Note that Dijkastra's algorithm will never finish running on a graph containing one or more negative cycles. As such it can not be used reliably on graphs containing non-positive edge costs.
@@ -343,7 +346,7 @@ relax (edge):
 
 ```
 
-### 5.2 The Bellman-Ford (BF) algorithm
+### 5.1.2 The Bellman-Ford (BF) algorithm
 The BF algorithm also finds the shortest paths to all nodes in a graph from a starting node. It is generally slower compared to  Dijkstra's, however it has the advantage of working on graphs with non-positive edge weights. The algorithm can tell weather a graph contains a negative cycle or not.
 ### Pseudocode
 ```
@@ -375,11 +378,11 @@ Given a weighted graph, find a spanning tree of minimum weight.
 
 To costruct a spanning tree for some graph $G(N,E)$, we must construct a subgraph to $G$ where $N_{sub} = N$ and $|E_{sub}| = |N| - 1.$
 
-This can be achieved in $|E| \choose{|N -1|}$ $- no of cycles$ ways.
+This can be achieved in ($|E| \choose{|N -1|}$ $- \text{ nr of cycles}$) different ways.
 
 As such comparing all possible spanning trees to find the cheapest is not feasable.
 
-For this problem we use a greedy algorithm.
+Instead we use some form of greedy algorithm to solve the problem.
 
 ### 5.2.1 Prim's algorithm
 ### Pseudocode
@@ -420,16 +423,19 @@ kruskal (nodes, edges, start_node):
 ## 5.3 Traveling salesman problem (TSP)
 The traveling salesman otherwise known as the minimum hamlitoncykle problem asks to find cheapest possible hamiltoncycle for a given graph.
 
-Generally this problem is fairly complicated. It can however be relaxed to finding the cheapest 1-tree. A one tree is a spanning tree for the nodes $N / \lbrace 1\rbrace $ connected to node one by two edges.
+Generally this problem is fairly complicated. It can however be relaxed to finding the cheapest 1-tree. A one tree is a spanning tree for the nodes $N / \lbrace 1\rbrace$ connected to node one by two edges.
 
-As such, to find the cheapest 1-tree we begin by finding the minimum spanning tree for the nodes $N / \lbrace 1\rbrace$, by using either prim or krusgals algorithm. We then add the two cheapest edges connecting to 1 to form a minimal 1-tree.
+As such, to find the cheapest 1-tree we begin by finding the minimum spanning tree for the nodes $N / \lbrace 1\rbrace$, by using either prim or Krusgals algorithm. We then add the two cheapest edges connecting to 1 to form a minimal 1-tree.
 
-Every hamliton cycle is a 1-tree but not vice verca. Every 1-tree that is not a hamlitoncycle simply failes to meet its node requirement. Recall that a hamliton cycle by definition is a cycle that traverses each node only once. Therefore
+The 1-tree for a graph is the lower bound to the traveling salesman problem. However, it is often not the solution.
 
-$$\forall i \in N : \delta(i) = 2$$
+Recall that a Hamilton cycle by definition is a cycle that traverses each node only once, i.e
 
-As such if our 1 tree is not a hamliton cycle then it can be converted by adding or subtracting edges to meet this condition.
+$$\forall i \in N : \delta(i) = 2.$$
 
+As such, if our 1 tree is not a Hamilton cycle then it can be converted into one by adding or subtracting edges until this condition is met.
+
+Still, this will get increasingly difficult as the complexity of the graph increases, however there is unfortunately no simple solution to this problem.
 
 ## 5.4 Matching problem
 
@@ -455,7 +461,7 @@ Thus, to find a maximal matchning, all we have to do is either find an augmentin
 Cycles of length complicate the problems slightly but can be collapsed to one point. They are called blossoms, and can be reduced.
 
 ~~~
-#TODO This is partly fucked
+#TODO This is partly fucked but gets the general vibe
 
 blossom (graph):
     matching = []
@@ -535,8 +541,11 @@ Simplex for MCFP:
 2. Calculate the nodeprices for each node in the spanning tree.
 3. Calculate the reduced costs for the remaining edges by taking the first node cost + the edge cost - the second node cost.
 4. If the cost for a edge is positive we wish to decrease it's flow as much as possible, it is optimal if the flow equals the lower bound. If the cost for a edge is negative we wish to increase it's flow as much as possible, it is optimal if the flow equals the upper bound.
-5. We select a non optimal edge to add into the base which creates a cycle.
-6. Solve
+5. If all reduced costs are optimal break.
+6. We select a non optimal edge to add into the base which creates a cycle.
+7. Try to increase or decrease flow in cycle to optimize the reduced cost.
+8. Enter that edge into the base, exit one of the other edges in the cycle.
+8. Repeat from step 2.
 ### 6.2 Maximal flow
 The maximum flow problem asks to find a the maximum flow through a single-source, single-sink flow network.
 
@@ -546,17 +555,24 @@ Edmonds-Karps method:
 1. Let $P$ be the cheapest path from source to sink.
 2. Let $f_{send} = \text{min } \lbrace \text{capacity}(i,j) - \text{flow}(i,j)  : (i,j) \in P\rbrace$.
 2. If $f_{send} = 0$, break.
-2. $\forall (i,j) \in P : \text{flow}(i,j) \leftarrow \text{flow}(i,j) + f_{max}$.
+2. $\forall (i,j) \in P : \text{flow}(i,j) \leftarrow \text{flow}(i,j) + f_{send}$.
 3. Repeat.
 
-### 6.3 The hungarian method
-The tillordnignas problem is solved by formulating and solving it's dual.
+### 6.3 The Assignment Problem
 
+Given a set of tasks and agents, in combination with costs that may vary depending on the agent-task assignment. The assignment problem asks to find a minimum cost way to assign one task to each agent.
+
+The assignment problem can be solved through it's dual
 $$\text{max } \sum_{i=1}^n \alpha_i + \sum_{j=1}^n \beta_j, \text{ when } \alpha_i + \beta_y \leq c_{ij} \forall i,j.$$
 
 Along with its complimentary constraints
 
 $$\forall i,j : x_{ij}(\alpha_i + \beta_y - c_{ij}) = 0.$$
+
+The hungarian method is an algorithm that solves this problem by way of the dual.
+Limitations of Markdown make describing this method awfully bothersome. 
+
+Video describing algorithm: https://www.youtube.com/watch?v=KhS95_5vS-A&t=1s
 
 ## 7. Integer programming
 
@@ -597,7 +613,7 @@ Binary variables can be used to reprecent choices between different constraints.
 Furthermore constraints on binary variables can be used to specify sets of possible choices that are possible to combine.
 
 ### 7.3 Methods for solving integer programming problems
-### 4.3.2 Land-Doig-Dakins method
+### 7.3.1 Land-Doig-Dakins method
 
 Land-Doig-Dakins method is a tree-searching algorithm for solving integer programming problems.
 
