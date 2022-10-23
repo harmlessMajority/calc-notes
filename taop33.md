@@ -5,18 +5,27 @@
 ### 1.1 Objective function
 
 In optimization, the objective function is a mathematical function used to model some value to be optimized. For linear programming specifically, it consists of a sum of variables, each multiplied by some linear constant. An example would be
+
 $$z = 5x_1 + 13+x_2 - 2x_3.$$
+
 This can be written more generally as
+
 $$z = c^Tx,$$
+
 $$z = \sum_{i,j} x_{ij} c_{ij}$$
+
 where x is the variable vector, and c the coefficient vector for the variables.
 
 ### 1.2 Linear constraints
 
 To model a real world linear optimization problem we combine an objective function with one or more linear constraints. A linear constraint consists of the sum of some variables multiplied by constants coupled with a comparison to some constant. An example would be
+
 $$5x_1 + 3x_2 \leq 5.$$
+
 This can be written more generally as
+
 $$Ax = b, $$
+
 where x is the variable vector, A the coefficient matrix for the variables, and b the constraint vector.
 
 
@@ -28,6 +37,7 @@ $$f(x^*) = 0.$$
 This definition is extended to equalities.
 
 Let $g(x) : \mathbb{R^n} \rightarrow \mathbb{R}$, for a given solution $x^{*}$, the constraint $g(x) = 0$ is said to be active iff
+
 $$g(x^*) = 0.$$
 
 In words, an inactive constraint is a constraint which could be removed from some problem without changing it's optimal solution. It is inactive in sense that it doesn't actually limit the solution in any way.
@@ -37,21 +47,28 @@ In words, an inactive constraint is a constraint which could be removed from som
 ### 2.1 Theory and explanation
 
 A set $C \subseteq R^n$ is said to be *convex* if the line segment between any two points in $C$ lies in $C$, i.e,
+
 $$\forall x_1,x_2 \in C,\forall \lambda \in [0,1] : \lambda x_1 + (1-\lambda)x_2 \in C.$$
 
 The values satisfying a linear inequality constraint make up a halfspace
+
 $$\lbrace x: a^Tx \leq b\rbrace.$$
 
 We can prove that halfspaces are convex sets.
+
 $$\text{For some halfspace } C,$$
+
 $$x_1, x_2\in C \iff a^Tx_1 \leq b \land a^Tx_2 \leq b. $$
+
 $$\implies \forall \lambda \in [0,1] : a^T(\lambda x_1 + (1-\lambda)x_2) = \lambda a^Tx + (1-\lambda)a^Tx_2 \leq \lambda b+(1-\lambda)b = b.$$
+
 $$ \text{Therefore, C is a convex set. } \square$$
 
 Thus, all linear inequality constraints are convex.
 Additionally, is is trivial that linear equality constraints are also convex, since the values satisfying them make a straight line.
 
 Furthermore, it holds that the intersection of one or multiple convex sets is also a convex set.
+
 $$(\forall X_i \in X : X_i \text{ is convex}) \implies \cap_iX_i \text{ is convex}.$$
 
 Because the possible values resulting from multiple active linear constraints is their intersection, it follows that multiple active linear constraints are also a convex set.
@@ -66,10 +83,15 @@ Thus, to solve any linear optimization problem, all we have to do is traverse th
 
 ### 2.2 General algorithm
 Assume we wish to solve the following optimization problem using the simplex method:
+
 $$\text{max } z = 4x_1 + 3x_2$$
+
 $$\text{when } 2x_1 + 3x_2 \leq 30$$
+
 $$x_1 \leq 6$$
+
 $$6x_1 + 4x_2 \leq 50$$
+
 $$x_1, x_2 \geq 0$$
 
 Before the simplex algorithm can be applied, the problem must first be converted into standard form. This means that the number of constraints must be equal to the number of basic variables, which can be achieved by modifying our original constraints.
@@ -81,15 +103,18 @@ Before the simplex algorithm can be applied, the problem must first be converted
 If we convert our original problem to standard form we get
 
 $$\text{max } z = 4x_1 + 3x_2$$
+
 $$\text{when }  2x_1 + 3x_2 + x_3 = 30$$
+
 $$x_1 + x_4 = 6$$
+
 $$6x_1 + 4x_2 + x_5 = 50$$
+
 $$x_1, x_2, x_3, x_4, x_5 \geq 0$$
 
 We now construct a tableau, with one column for each variable and one row for each equation in the standard form.
 
 Additionally, construct a base consisting of variables who's columns are all cleared out except for a single 1.
-
 
 |Base|z|$x_1$|$x_2$|$x_3$|$x_4$|$x_5$|$\hat{b}$|
 |--|--|--|--|--|--|--|--|
@@ -160,9 +185,13 @@ This fact can be used to reformulate an LP problem in order to view it through a
 Consider the following maximization problem:
 
 $$\text{max } z = 3x_1 + 4x_2$$
+
 $$\frac{1}{2}x_1 + 2x_2 \leq 30 \text{ (1) }$$
+
 $$3x_1 + x_2 \leq 25 \text{ (2)}$$
+
 $$x_1, x_2 \geq 0.$$
+
 By multiplying both sides of (1) by 6 it follows that
 $$3x_1 + 12x_2 \leq 180 \iff z = 3x_1 + 4x_2 \leq 3x_1 + 12x_2 \leq 180.$$
 So we've concluded that based on (1) our objective function cannot be greater than 180.
@@ -175,15 +204,19 @@ In fact, any linear combination of these two constraints resulting in variable c
 This can be written mathematically as:
 
 $\forall y_1, y_2 \in \mathbb{R},$
+
 $$z \leq y_1 \cdot (1) + y_2 \cdot (2) \iff$$
 
 $$\iff z \leq(\frac{1}{2}y_1 + 3y_2)x_1 + (2y_1 + y_2)x_2 \leq 30y_1 + 25y_2. \text{ (3)}$$
+
 The right side expression of this equation is the upper bound of our objective function. We can use this to define a new function w.
+
 $$w = 3y_1 + 25y_2$$
 
 Additionally, based on (3) we get 2 linear constraints for w.
 
 $$\text{(3)}\implies  3x_1 + 4x_2 \leq (\frac{1}{2}y_1 + 3y_2)x_1 + (2y_1 + y_2)x_2 \iff$$
+
 $$\iff \frac{1}{2}y_1 + 3y_2 \geq 3 \land  2y_1 + y_2\geq 4.$$
 
 It can now be deduced, that becuase
@@ -202,7 +235,9 @@ Om primala bivillkor i inte är aktivt, måste yi = 0.
 Om duala bivillkor j inte är aktivt, måste xj = 0
 
 $$\forall i \in [1 \dots m]: y_i \sum_{j=1}^n(a_{ij}x_j - b_i) = 0$$
+
 $$\forall j \in [1 \dots n]: x_j \sum_{i=1}^m(a_{ij}y_i - c_j) = 0$$
+
 * Weak duality property:
   
     $\forall \bar{z} \in Z, \forall \bar{w} \in W,$
@@ -387,7 +422,9 @@ Generally this problem is fairly complicated. It can however be relaxed to findi
 As such, to find the cheapest 1-tree we begin by finding the minimum spanning tree for the nodes $N / \lbrace 1\rbrace$, by using either prim or krusgals algorithm. We then add the two cheapest edges connecting to 1 to form a minimal 1-tree.
 
 Every hamliton cycle is a 1-tree but not vice verca. Every 1-tree that is not a hamlitoncycle simply failes to meet its node requirement. Recall that a hamliton cycle by definition is a cycle that traverses each node only once. Therefore
+
 $$\forall i \in N : \delta(i) = 2$$
+
 As such if our 1 tree is not a hamliton cycle then it can be converted by adding or subtracting edges to meet this condition.
 
 
@@ -407,6 +444,7 @@ Given a matching $M$, we define an augmenting path as a path that starts and end
 By finding an augmenting path to a matching, we can swap the matched and not matched edges in the path to increase the size of the matching by 1.
 
 Furthermore, Berge's lemma states that
+
 $$\text{Contains an augmenting path } \iff \text{Matching is not maximal}$$
 
 Thus, to find a maximal matchning, all we have to do is either find an augmenting path, or verify that none exist. 
@@ -465,6 +503,7 @@ The chinese postman problem asks to find a minimum cost cycle which traverses ea
 Note that the lower bound to this problem is to traverse each edge exactly once. Thus if the graph contains a Euler cycle, it must be an optimal solution to the problem. 
 
 A graph G(N, E) contains one or more Euler cycles iff
+
 $$\forall i \in N, \exists k \in \mathbb{Z} : \delta(i) = 2k.$$
 
 However if this condition is not met we need to select one or more edges to traverse multiple times in order to solve the problem.
@@ -513,11 +552,8 @@ The tillordnignas problem is solved by formulating and solving it's dual.
 $$\text{max } \sum_{i=1}^n \alpha_i + \sum_{j=1}^n \beta_j, \text{ when } \alpha_i + \beta_y \leq c_{ij} \forall i,j.$$
 
 Along with its complimentary constraints
+
 $$\forall i,j : x_{ij}(\alpha_i + \beta_y - c_{ij}) = 0.$$
-
-
-
-
 
 ## 7. Integer programming
 
@@ -532,21 +568,28 @@ Integer variables however, pose an additional challenge, as the feasible values 
 
 ### 7.1 LP-relaxation
 An LP-relaxation of a problem simply removes the integrality constraints. The allowed solutionspace to the problem will be a discrete set of points contained within the bounds of the LP-relaxation. 
+
 $$\text{max } z^* \leq \text{max } z_{LP}$$
+
 The difference between $Z_{LP}^*$ abd $z^*$ us called the *dual gap*.
 Rounding the LP-relaxation to the nearest integer point can give an infeasable point.
 
 Every feasable solution point to the problem is a lower bound to the problem.
+
 $$\text{max } z \leq \text{max } z^*$$
 
 Therefore we now have an intervall for $z^*$.
+
 $$\text{max } z \leq \text{max } z^* \leq \text{max } z_{LP}$$
+
 By optimising this intervall, either by finding a better allowed solution, or by tightening the linear relaxation, we can achiave a smaller intervall which will result in a smaller relativ error.
 
 
 ### 7.2 Binary variables
 A binary variable is an integer variable that can only assume the values 1 or 0.
+
 $$x \in \lbrace 0,1\rbrace $$
+
 Binary variables can be used to reprecent choices between different constraints.
 Furthermore constraints on binary variables can be used to specify sets of possible choices that are possible to combine.
 
