@@ -27,7 +27,7 @@ $$f(x^*) = 0.$$
 
 This definition is extended to equalities.
 
-Let $g(x) : \mathbb{R^n} \rightarrow \mathbb{R}$, for a given solution $x^*$, the constraint $g(x) = 0$ is said to be active iff
+Let $g(x) : \mathbb{R^n} \rightarrow \mathbb{R}$, for a given solution $x^{*}$, the constraint $g(x) = 0$ is said to be active iff
 $$g(x^*) = 0.$$
 
 In words, an inactive constraint is a constraint which could be removed from some problem without changing it's optimal solution. It is inactive in sense that it doesn't actually limit the solution in any way.
@@ -66,11 +66,11 @@ Thus, to solve any linear optimization problem, all we have to do is traverse th
 
 ### 2.2 General algorithm
 Assume we wish to solve the following optimization problem using the simplex method:
-$$max \; z = 4x_1 + 3x_2$$
-$$when \; 2x_1 + 3x_2 \leq 30$$
-$$\; x_1 \leq 6$$
-$$\; 6x_1 + 4x_2 \leq 50$$
-$$\; x_1, x_2 \geq 0$$
+$$\text{max } z = 4x_1 + 3x_2$$
+$$\text{when } 2x_1 + 3x_2 \leq 30$$
+$$x_1 \leq 6$$
+$$6x_1 + 4x_2 \leq 50$$
+$$x_1, x_2 \geq 0$$
 
 Before the simplex algorithm can be applied, the problem must first be converted into standard form. This means that the number of constraints must be equal to the number of basic variables, which can be achieved by modifying our original constraints.
 
@@ -80,11 +80,11 @@ Before the simplex algorithm can be applied, the problem must first be converted
 
 If we convert our original problem to standard form we get
 
-$$max \; z = 4x_1 + 3x_2$$
-$$when \; 2x_1 + 3x_2 + x_3 = 30$$
-$$\; x_1 + x_4 = 6$$
-$$\; 6x_1 + 4x_2 + x_5 = 50$$
-$$\; x_1, x_2, x_3, x_4, x_5 \geq 0$$
+$$\text{max } z = 4x_1 + 3x_2$$
+$$\text{when }  2x_1 + 3x_2 + x_3 = 30$$
+$$x_1 + x_4 = 6$$
+$$6x_1 + 4x_2 + x_5 = 50$$
+$$x_1, x_2, x_3, x_4, x_5 \geq 0$$
 
 We now construct a tableau, with one column for each variable and one row for each equation in the standard form.
 
@@ -143,7 +143,7 @@ Thus the problem is solved.
 From the tablou, we gather that
 * The maximum value for the objective function is 36.
 * The optimal solution is: $x_1 = 3, x_2 = 8$.
-* The optimal dual solution is: $y_1 = 1/5, \; y_2 = 0, \; y_3 = 3/5$.
+* The optimal dual solution is: $y_1 = 1/5, y_2 = 0, y_3 = 3/5$.
 * Constraint 2 is active, since $x_4 = 3$.
 * Constraints 1 and 3 are not active, since: $x_3 = 0, x_5 = 0$.
 
@@ -184,7 +184,7 @@ $$w = 3y_1 + 25y_2$$
 Additionally, based on (3) we get 2 linear constraints for w.
 
 $$\text{(3)}\implies  3x_1 + 4x_2 \leq (\frac{1}{2}y_1 + 3y_2)x_1 + (2y_1 + y_2)x_2 \iff$$
-$$\iff \frac{1}{2}y_1 + 3y_2 \geq 3 \; \land \; 2y_1 + y_2\geq 4.$$
+$$\iff \frac{1}{2}y_1 + 3y_2 \geq 3 \land  2y_1 + y_2\geq 4.$$
 
 It can now be deduced, that becuase
 $z \leq w,$
@@ -400,7 +400,7 @@ The goal of a matching problem is to maximize the amount of edges in the matchin
 The problem can be formulated mathematically as 
 
 
-$$ \text{max } c^Tx \text{ when } x(\delta{(i)}) \leq 1 \; \forall x \in N, x \in \{0,1\}^m$$
+$$ \text{max } c^Tx \text{ when } x(\delta{(i)}) \leq 1 \forall x \in N, x \in \{0,1\}^m$$
 
 Given a matching $M$, we define an augmenting path as a path that starts and ends on unmatched nodes, and whose edges alternate between matched and unmatched. 
 
@@ -474,7 +474,7 @@ Since finding an Euler cycle is fairly trivial assuming that one does in fact ex
 ### Algorithm:
 1. Let $N_U = \lbrace i \in N : \nexists k \in \mathbb{Z} : \delta(i) = 2k  \rbrace$.
 2. If $N_U = \varnothing$, find an Euler cycle and break.
-3. Let $E_U = \lbrace (i,j): i, j \in N_U, \; i \neq j\rbrace$.
+3. Let $E_U = \lbrace (i,j): i, j \in N_U, i \neq j\rbrace$.
 4. $\forall (i,j) \in E_U : \text{cost}(i,j) = \text{cheapest path from i to j in }G(N,E)$.
 5. Let $M$ be the cheapest perfect matching for $G_U(N_U,E_U)$.
 6. $E \leftarrow E \cup M$.
@@ -502,15 +502,15 @@ The problem can be solved using Edmonds-Karps method.
 
 Edmonds-Karps method:
 1. Let $P$ be the cheapest path from source to sink.
-2. Let $f_{send} = \min \; \lbrace \text{capacity}(i,j) - \text{flow}(i,j)  : (i,j) \in P\rbrace$.
+2. Let $f_{send} = \text{min } \lbrace \text{capacity}(i,j) - \text{flow}(i,j)  : (i,j) \in P\rbrace$.
 2. If $f_{send} = 0$, break.
-2. $\forall (i,j) \in P : \;\text{flow}(i,j) \leftarrow \text{flow}(i,j) + f_{max}$.
+2. $\forall (i,j) \in P : \text{flow}(i,j) \leftarrow \text{flow}(i,j) + f_{max}$.
 3. Repeat.
 
 ### 6.3 The hungarian method
 The tillordnignas problem is solved by formulating and solving it's dual.
 
-$$\text{max} \; \sum_{i=1}^n \alpha_i + \sum_{j=1}^n \beta_j, \text{ when } \alpha_i + \beta_y \leq c_{ij} \; \forall i,j.$$
+$$\text{max } \sum_{i=1}^n \alpha_i + \sum_{j=1}^n \beta_j, \text{ when } \alpha_i + \beta_y \leq c_{ij} \forall i,j.$$
 
 Along with its complimentary constraints
 $$\forall i,j : x_{ij}(\alpha_i + \beta_y - c_{ij}) = 0.$$
