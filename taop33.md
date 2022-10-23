@@ -135,6 +135,7 @@ The exiting variable should be the basic variable with the smallest resulting nu
 By use of row operations, make shure the collumn of the new entering variable is cleared except for a single 1 where it enters.
 
 The result tablou is 
+<center>
 
 |Base|z|$x_1$|$x_2$|$x_3$|$x_4$|$x_5$|$\hat{b}$|
 |--|--|--|--|--|--|--|--|
@@ -142,6 +143,8 @@ The result tablou is
 |$x_3$|0|0|3|1|-2|0|18|
 |$x_1$|0|1|0|0|1|0|6|
 |$x_5$|0|0|4|0|-6|1|14|
+
+</center>
 
 repeating this process we get
 
